@@ -505,7 +505,7 @@ kron(a::AdjointAbsVec, b::AdjointAbsVec) = adjoint(kron(adjoint(a), adjoint(b)))
 kron(a::AdjOrTransAbsVec, b::AdjOrTransAbsVec) = transpose(kron(transpose(a), transpose(b)))
 
 # Matrix power
-(^)(A::AbstractMatrix, p::Integer) = p < 0 ? power_by_squaring(inv(A), Base.uabs(-p)) : power_by_squaring(A, Base.uabs(p))
+(^)(A::AbstractMatrix, p::Integer) = p < 0 ? power_by_squaring(inv(A), Base.uabs(p)) : power_by_squaring(A, Base.uabs(p))
 function (^)(A::AbstractMatrix{T}, p::Integer) where T<:Integer
     # make sure that e.g. [1 1;1 0]^big(3)
     # gets promotes in a similar way as 2^big(3)
