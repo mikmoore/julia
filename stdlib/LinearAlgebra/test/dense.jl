@@ -596,6 +596,11 @@ end
 
     A8 = 100 * [-1+1im 0 0 1e-8; 0 1 0 0; 0 0 1 0; 0 0 0 1]
     @test exp(log(A8)) ≈ A8
+
+    @testset "Matrix ^ typemin(BitSigned) tests" for elty in Base.BitSigned_types
+        # test that typemin(BitSigned) powers are correct
+        @test Float64[1 1; 0 1] ^ typemin(elty) == Float64[1 typemin(elty); 0 1]
+    end
 end
 
 @testset "Matrix trigonometry" begin
